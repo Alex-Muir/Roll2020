@@ -1,7 +1,7 @@
 # Roll2020
 ## A Cyberpunk2020 oriented dice roller and character creator built for the command line
 
-OPTIONS:
+OPTIONS:  
   -p	Prints a percentage.
   -s	Sums the rolls of each respective die type.
   -c	Creates a random character based on the "fast" method for
