@@ -7,7 +7,7 @@
   -c&emsp;Creates a random character based on the "fast" method forgenerating character points. This means that no stat will be lower than 3.  
 
 **EXAMPLES:**  
-&emsp;Roll a percentage.    
+Roll a percentage.    
     &emsp;roll2020 -p&emsp;This will roll a percentage.  
     &emsp;roll2020 -p -p -p		This will roll 3 percentage rolls.  
     &emsp;roll2020 -ppp		This will also roll 3 percentage rolls.  
