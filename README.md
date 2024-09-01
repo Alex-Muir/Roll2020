@@ -3,8 +3,8 @@
 
 OPTIONS:  
   -p&emsp;Prints a percentage.  
-  -s&emsp;Sums the rolls of each respective die type.
-  -c&emsp;Creates a random character based on the "fast" method forgenerating character points. This means that no stat will be lower than 3.
+  -s&emsp;Sums the rolls of each respective die type.  
+  -c&emsp;Creates a random character based on the "fast" method forgenerating character points. This means that no stat will be lower than 3.  
 
 EXAMPLES:  
   Roll a percentage.  
