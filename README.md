@@ -12,11 +12,11 @@ Roll a percentage.
     &emsp;roll2020 -p -p -p		This will roll 3 percentage rolls.  
     &emsp;roll2020 -ppp		This will also roll 3 percentage rolls.  
 
-  Roll d10s and/or d6s.
-    roll2020 2 d6 4 d10		This will roll 2 d6 and 4 d10.
-    roll2020 2 d6 d10		This will roll 2 d6 and 1 d10.
-    roll2020 2 d6		This will roll 2 d6.
-    roll2020 -s 2 d6 4 d10	This will roll 2 d6 and 4 d10 and return the sum of each.
+  Roll d10s and/or d6s.  
+    &emsp;roll2020 2 d6 4 d10		This will roll 2 d6 and 4 d10.
+    &emsp;roll2020 2 d6 d10		This will roll 2 d6 and 1 d10.
+    &emsp;roll2020 2 d6		This will roll 2 d6.
+    &emsp;roll2020 -s 2 d6 4 d10	This will roll 2 d6 and 4 d10 and return the sum of each.
 
   Generate characters.
     roll2020 -c			This will generate a character (role, stats, and derived stats).
