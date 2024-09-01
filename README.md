@@ -8,8 +8,8 @@
 
 **EXAMPLES:**  
 Roll a percentage.    
-    &emsp;roll2020 -p&emsp;&emsp;&emsp;This will roll a percentage.  
-    &emsp;roll2020 -p -p -pT&emsp;his will roll 3 percentage rolls.  
+    &emsp;roll2020 -p&emsp;&emsp;&emsp;&emsp;his will roll a percentage.  
+    &emsp;roll2020 -p -p -p&emsp;This will roll 3 percentage rolls.  
     &emsp;roll2020 -ppp		This will also roll 3 percentage rolls.  
 
   Roll d10s and/or d6s.  
