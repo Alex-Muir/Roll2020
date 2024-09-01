@@ -126,7 +126,7 @@ int main(int argc, char *argv[]) {
 // Print the instructions for rollDice if no arguments are entered
 void printInstructions() {
     
-    printf("\nroll2020 is a program that will roll dice for you. You may roll one or "
+    printf("\nroll2020 is a program that will roll dice and build a character for you. You may roll one or "
         "multiple d6 or d10.\nInput should be entered as follows: [option] [num_dice] [dice_type] ... "
         "where num_dice is an integer\ngreater than 0 and dice_type is the type of dice you "
         "would like to roll. dice_type should\nbe entered as a lower case d with the number of "
@@ -134,9 +134,9 @@ void printInstructions() {
     printf("If nothing is entered after roll2020 the program will print the instructions and exit.\n"
         "You do not need to enter 0 for a dice you do not wish to roll. Simply omit the [num_dice]\n"
         "and [dice_type] for that particular die. If a [dice_type] is entered with no [num_dice]\n" 
-        "before it the program will simply roll one die of that type. Any more than four arguments\n"
-        "will result in error. Extra leading numbers will be ignored. Trailing numbers will result in\n"
-        "error.\n\n");
+        "before it the program will simply roll one die of that type. Extra leading numbers will be\n"
+		"ignored. Trailing numbers will result in error.Specifying the -s option without dice will \n"
+		"result in error.\n\n");
 	printf("OPTIONS:\n");
 	printf("  -p\tPrints a percentage.\n");
 	printf("  -s\tSums the rolls of each respective die type.\n");
@@ -150,6 +150,8 @@ void printInstructions() {
 void printExamples() {
 
     printf("EXAMPLES:\n");
+	printf("  Print instructions.\n");
+	printf("    roll2020\t\t\tThis will print instructions, examples, and sample errors.\n\n");
 	printf("  Roll a percentage.\n");
 	printf("    roll2020 -p\t\t\tThis will roll a percentage.\n");
 	printf("    roll2020 -p -p -p\t\tThis will roll 3 percentage rolls.\n");
