@@ -5,22 +5,25 @@
 #include <string.h>         	// strcmp, strlen
 #include <time.h>           	// time
 
-#define     D_10    	10      // number of sides on a D10
-#define     D_6     	6       // number of ides on a D6
+#define     	D_10    	10      	// number of sides on a D10
+#define     	D_6     	6       	// number of ides on a D6
 #define		PERCENTAGE 	100		// basis for percentages
-#define		MAX_ARGS	8		// maximum number of arguments possible
+//#define		MAX_ARGS	8		// maximum number of arguments possible
 #define		NUM_ROLES	9		// number of character roles in the game
 #define		NUM_STATS	9		// numner of base stats
-#define		RUN			3		// MA multiple to determine run distance
+#define		RUN		3		// MA multiple to determine run distance
 #define		LEAP		4		// MA multiple to determine leap distance
 #define		LIFT		40		// BODY multiple to determine Lift max in kg
 #define		CARRY		10		// BODY multiple to determine Carry max in kg
 #define		HUMANITY 	10		// EMP multiple to determine Humanity
+#define		SOLO_ROLLS	6		// Number of rolls for a solo character for equipment
+#define		OTHER_ROLLS	3		// Number of rolls for other characters for equipment
 
 void printInstructions();
 void printExamples();
 void percentageRoll();
 void generateStats();
+void generateEquipment(bool);
 void printResults(bool, bool, int, bool, int);
 int greaterThanTwo();
 
@@ -37,9 +40,9 @@ int main(int argc, char *argv[]) {
     int num_d10 = -1;
     bool rollD10 = false;
     bool rollD6 = false;
-	bool dice_sum = false;
+    bool dice_sum = false;
 
-	srand(time(NULL));
+    srand(time(NULL));
 
     for(int i = 1; i < argc; i++) { 
         
@@ -191,6 +194,13 @@ void generateStats() {
 	BODY = greaterThanTwo();
 	EMP = greaterThanTwo();
 
+	bool isSolo = false;
+
+	char *role = roles[rand() % NUM_ROLES];
+
+	if((strcmp(role, "Solo") == 0))
+		isSolo = true;
+
 	if(BODY == 3 || BODY == 4)
 		BTM = -1;
 	else if(BODY == 5 || BODY == 6 || BODY == 7)
@@ -202,7 +212,9 @@ void generateStats() {
 	else
 		fprintf(stderr, "ERROR: There was a problem calculating BTM\n\n");
 
-	printf("\nROLE: %s\n\n", roles[rand() % NUM_ROLES]);
+
+
+	printf("\nROLE: %s\n\n", role);
 	printf("INT: %d\n", greaterThanTwo());
 	printf("REF: %d\n", greaterThanTwo());
 	printf("TECH: %d\n", greaterThanTwo());
@@ -218,7 +230,9 @@ void generateStats() {
 	printf("Carry: %d\n", BODY * CARRY);
 	printf("Save: %d\n", BODY);
 	printf("BTM: %d\n", BTM);
-	printf("Humanity: %d\n", EMP * HUMANITY);
+	printf("Humanity: %d\n\n", EMP * HUMANITY);
+
+	generateEquipment(isSolo);
 	
 }
 
@@ -272,6 +286,69 @@ void printResults(bool dice_sum, bool rollD10, int num_d10, bool rollD6, int num
     }
 
 	printf("\n");
+}
+
+// Generate character equipment
+void generateEquipment(bool isSolo) {
+
+	char *cyberoptics[] = {"Infrared", "Lowlight", "Camera", "Dartgun", "Antidazzle", "Targeting Scope"};
+	char *cyberarmGun[] = {"Lt. Pistol", "Med. Pistol", "Lt. SMG", "Med. SMG", "Hvy. Pistol", "VHvy. Pistol"};
+	char *cyberaudio[] = {"Wearman", "Radio Splice", "Phone Link", "Amplified Hearing", "Sound Editing", "Digital Recording Link"};
+	char *weapon[] = {"Knife", "Lt. Pisol", "Med. Pistol", "Hvy. Pistol", "Lt. SMG", "Med. SMG", "Hvy. SMG", "Lt. Assault Rifle", "Med. Assault Rifle", "Hvy. Assault Rifle"};
+	char *armor[] = {"Hvy. Leather", "Armor Vest", "Lt. Armor Jacket", "Lt. Armor Jacket", "Med. Armor Jacket", "Med. Armor Jacket", "Med. Armor Jacket", "Hvy. Armor Jacket", "Hvy. Armor Jacket", "MetalGear"};	
+	int numRolls = -1;
+	int i;
+	int weaponArmor;
+
+	if(isSolo)
+		numRolls = SOLO_ROLLS;
+	else
+		numRolls = OTHER_ROLLS;
+
+	printf("CYBERWARE\n");
+
+	for(i = 0; i < numRolls; i++) {
+		int tmp = rand() % D_10;
+
+		switch(tmp) {
+			case 0:
+				printf("Cyberoptics: %s\n", cyberoptics[rand() % D_6]);
+				break;
+			case 1:
+				printf("Cyberarm with: %s\n", cyberarmGun[rand() % D_6]);
+				break;
+			case 2:
+				printf("Cyberaudio: %s\n", cyberaudio[rand() % D_6]);
+				break;
+			case 3:
+				printf("Big Knuckles\n");
+				break;
+			case 4:
+				printf("Rippers\n");
+				break;
+			case 5:
+				printf("Vampires\n");
+				break;
+			case 6:
+				printf("Slice n' Dice\n");
+				break;
+			case 7: 
+				printf("Kerenzikov\n");
+				break;
+			case 8:
+				printf("Sandevistan\n");
+				break;
+			case 9:
+				printf("NOTHING\n");
+
+		}
+	}
+
+	weaponArmor = rand() % D_10;
+
+	printf("\nWEAPONS & ARMOR\n");
+	printf("Weapon: %s\n", weapon[weaponArmor]);
+	printf("Armor: %s\n", armor[weaponArmor]);
 }
 
 
