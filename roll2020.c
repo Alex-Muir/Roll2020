@@ -1,23 +1,23 @@
-#include <stdio.h>          	// printf, fprintf, stderr
-#include <stdlib.h>         	// atoi, srand, rand
-#include <ctype.h>          	// isdigit
-#include <stdbool.h>        	// bool, true, false
-#include <string.h>         	// strcmp, strlen
-#include <time.h>           	// time
+#include <stdio.h>          // printf, fprintf, stderr
+#include <stdlib.h>         // atoi, srand, rand
+#include <ctype.h>          // isdigit
+#include <stdbool.h>        // bool, true, false
+#include <string.h>         // strcmp, strlen
+#include <time.h>           // time
 
-#define     	D_10    	10      	// number of sides on a D10
-#define     	D_6     	6       	// number of ides on a D6
-#define		PERCENTAGE 	100		// basis for percentages
-//#define		MAX_ARGS	8		// maximum number of arguments possible
-#define		NUM_ROLES	9		// number of character roles in the game
-#define		NUM_STATS	9		// numner of base stats
-#define		RUN		3		// MA multiple to determine run distance
-#define		LEAP		4		// MA multiple to determine leap distance
-#define		LIFT		40		// BODY multiple to determine Lift max in kg
-#define		CARRY		10		// BODY multiple to determine Carry max in kg
-#define		HUMANITY 	10		// EMP multiple to determine Humanity
-#define		SOLO_ROLLS	6		// Number of rolls for a solo character for equipment
-#define		OTHER_ROLLS	3		// Number of rolls for other characters for equipment
+#define     D_10    		10      // number of sides on a D10
+#define     D_6     		6       // number of ides on a D6
+#define		PERCENTAGE 		100		// basis for percentages
+#define		NUM_ROLES		9		// number of character roles in the game
+#define		NUM_STATS		9		// numner of base stats
+#define		RUN				3		// MA multiple to determine run distance
+#define		LEAP			4		// MA multiple to determine leap distance
+#define		LIFT			40		// BODY multiple to determine Lift max in kg
+#define		CARRY			10		// BODY multiple to determine Carry max in kg
+#define		HUMANITY 		10		// EMP multiple to determine Humanity
+#define		SOLO_ROLLS		6		// Number of rolls for a solo character for equipment
+#define		OTHER_ROLLS		3		// Number of rolls for other characters for equipment
+#define		CYBER_OFFSET	3		// Offset for cyberware check during equipment generation
 
 void printInstructions();
 void printExamples();
@@ -215,22 +215,24 @@ void generateStats() {
 
 
 	printf("\nROLE: %s\n\n", role);
-	printf("INT: %d\n", greaterThanTwo());
-	printf("REF: %d\n", greaterThanTwo());
-	printf("TECH: %d\n", greaterThanTwo());
-	printf("COOL: %d\n", greaterThanTwo());
-	printf("ATTR: %d\n", greaterThanTwo());
-	printf("LUCK: %d\n", greaterThanTwo());
-	printf("MA: %d\n", MA);
-	printf("BODY: %d\n", BODY);
-	printf("EMP: %d\n\n", EMP);
-	printf("Run: %d\n", MA * RUN);
-	printf("Leap: %d\n", MA * LEAP);
-	printf("Lift: %d\n", BODY * LIFT);
-	printf("Carry: %d\n", BODY * CARRY);
-	printf("Save: %d\n", BODY);
-	printf("BTM: %d\n", BTM);
-	printf("Humanity: %d\n\n", EMP * HUMANITY);
+	printf("STATS\n");
+	printf("  INT: %d\n", greaterThanTwo());
+	printf("  REF: %d\n", greaterThanTwo());
+	printf("  TECH: %d\n", greaterThanTwo());
+	printf("  COOL: %d\n", greaterThanTwo());
+	printf("  ATTR: %d\n", greaterThanTwo());
+	printf("  LUCK: %d\n", greaterThanTwo());
+	printf("  MA: %d\n", MA);
+	printf("  BODY: %d\n", BODY);
+	printf("  EMP: %d\n\n", EMP);
+	printf("DERIVED STATS\n");
+	printf("  Run: %d\n", MA * RUN);
+	printf("  Leap: %d\n", MA * LEAP);
+	printf("  Lift: %d\n", BODY * LIFT);
+	printf("  Carry: %d\n", BODY * CARRY);
+	printf("  Save: %d\n", BODY);
+	printf("  BTM: %d\n", BTM);
+	printf("  Humanity: %d\n\n", EMP * HUMANITY);
 
 	generateEquipment(isSolo);
 	
@@ -291,14 +293,31 @@ void printResults(bool dice_sum, bool rollD10, int num_d10, bool rollD6, int num
 // Generate character equipment
 void generateEquipment(bool isSolo) {
 
-	char *cyberoptics[] = {"Infrared", "Lowlight", "Camera", "Dartgun", "Antidazzle", "Targeting Scope"};
-	char *cyberarmGun[] = {"Lt. Pistol", "Med. Pistol", "Lt. SMG", "Med. SMG", "Hvy. Pistol", "VHvy. Pistol"};
-	char *cyberaudio[] = {"Wearman", "Radio Splice", "Phone Link", "Amplified Hearing", "Sound Editing", "Digital Recording Link"};
-	char *weapon[] = {"Knife", "Lt. Pisol", "Med. Pistol", "Hvy. Pistol", "Lt. SMG", "Med. SMG", "Hvy. SMG", "Lt. Assault Rifle", "Med. Assault Rifle", "Hvy. Assault Rifle"};
-	char *armor[] = {"Hvy. Leather", "Armor Vest", "Lt. Armor Jacket", "Lt. Armor Jacket", "Med. Armor Jacket", "Med. Armor Jacket", "Med. Armor Jacket", "Hvy. Armor Jacket", "Hvy. Armor Jacket", "MetalGear"};	
+	char *cyberoptics[] = {"Infrared", "Lowlight", "Camera", "Dartgun", "Antidazzle", 
+						   "Targeting Scope"};
+
+	char *cyberarmGun[] = {"Lt. Pistol", "Med. Pistol", "Lt. SMG", "Med. SMG", 
+						   "Hvy. Pistol", "VHvy. Pistol"};
+
+	char *cyberaudio[] = {"Wearman", "Radio Splice", "Phone Link", "Amplified Hearing", 
+						  "Sound Editing", "Digital Recording Link"};
+
+	char *weapon[] = {"Knife", "Lt. Pisol", "Med. Pistol", "Hvy. Pistol", "Lt. SMG", 
+					  "Med. SMG", "Hvy. SMG", "Lt. Assault Rifle", "Med. Assault Rifle", 
+					  "Hvy. Assault Rifle"};
+
+	char *armor[] = {"Hvy. Leather", "Armor Vest", "Lt. Armor Jacket", "Lt. Armor Jacket", 
+					 "Med. Armor Jacket", "Med. Armor Jacket", "Med. Armor Jacket", 
+					 "Hvy. Armor Jacket", "Hvy. Armor Jacket", "MetalGear"};
+	
 	int numRolls = -1;
 	int i;
+	int d6Tmp;
 	int weaponArmor;
+	int opticsCheck[] = {0, 0, 0, 0, 0, 0};
+	int cyberarmCheck[] = {0, 0, 0, 0, 0, 0};
+	int audioCheck[] = {0, 0, 0, 0, 0, 0};
+	int cyberwareCheck[] = {0, 0, 0, 0, 0, 0, 0};
 
 	if(isSolo)
 		numRolls = SOLO_ROLLS;
@@ -309,46 +328,129 @@ void generateEquipment(bool isSolo) {
 
 	for(i = 0; i < numRolls; i++) {
 		int tmp = rand() % D_10;
-
+		//printf("i = %d\n", i);
 		switch(tmp) {
 			case 0:
-				printf("Cyberoptics: %s\n", cyberoptics[rand() % D_6]);
+
+				d6Tmp = rand() %D_6;
+
+				while(opticsCheck[d6Tmp] == 1) {
+					d6Tmp = rand() % D_6;
+				}
+
+				printf("  Cyberoptics: %s\n", cyberoptics[d6Tmp]);
+				opticsCheck[d6Tmp] = 1;
 				break;
 			case 1:
-				printf("Cyberarm with: %s\n", cyberarmGun[rand() % D_6]);
+
+				d6Tmp = rand() %D_6;
+
+				while(cyberarmCheck[d6Tmp] == 1) {
+					d6Tmp = rand() % D_6;
+				}
+
+				printf("  Cyberarm with: %s\n", cyberarmGun[d6Tmp]);
+				cyberarmCheck[d6Tmp] = 1;
 				break;
 			case 2:
-				printf("Cyberaudio: %s\n", cyberaudio[rand() % D_6]);
+
+				d6Tmp = rand() %D_6;
+
+				while(audioCheck[d6Tmp] == 1) {
+					d6Tmp = rand() % D_6;
+				}
+
+				printf("  Cyberaudio: %s\n", cyberaudio[d6Tmp]);
+				audioCheck[d6Tmp] = 1;
 				break;
 			case 3:
-				printf("Big Knuckles\n");
+				if(cyberwareCheck[tmp-CYBER_OFFSET] == 0){
+					printf("  Big Knuckles\n");
+					cyberwareCheck[tmp-CYBER_OFFSET] = 1;
+				}
+				else{
+					//printf("  Cyberware already assigned. Rerolling.\n");
+					--i;
+				}
+				
 				break;
 			case 4:
-				printf("Rippers\n");
+				if(cyberwareCheck[tmp-CYBER_OFFSET] == 0){
+					printf("  Rippers\n");
+					cyberwareCheck[tmp-CYBER_OFFSET] = 1;
+				}
+				else{
+					//printf("  Cyberware already assigned. Rerolling.\n");
+					--i;
+				}
+				
 				break;
 			case 5:
-				printf("Vampires\n");
+				if(cyberwareCheck[tmp-CYBER_OFFSET] == 0){
+					printf("  Vampires\n");
+					cyberwareCheck[tmp-CYBER_OFFSET] = 1;
+				}
+				else{
+					//printf("  Cyberware already assigned. Rerolling.\n");
+					--i;
+				}
+				
 				break;
 			case 6:
-				printf("Slice n' Dice\n");
+				if(cyberwareCheck[tmp-CYBER_OFFSET] == 0){
+					printf("  Slice n' Dice\n");
+					cyberwareCheck[tmp-CYBER_OFFSET] = 1;
+				}
+				else{
+					//printf("  Cyberware already assigned. Rerolling.\n");
+					--i;
+				}
+				
 				break;
 			case 7: 
-				printf("Kerenzikov\n");
+				if(cyberwareCheck[tmp-CYBER_OFFSET] == 0){
+					printf("  Kerenzikov\n");
+					cyberwareCheck[tmp-CYBER_OFFSET] = 1;
+				}
+				else{
+					//printf("  Cyberware already assigned. Rerolling.\n");
+					--i;
+				}
+				
 				break;
 			case 8:
-				printf("Sandevistan\n");
+				if(cyberwareCheck[tmp-CYBER_OFFSET] == 0){
+					printf("  Sandevistan\n");
+					cyberwareCheck[tmp-CYBER_OFFSET] = 1;
+				}
+				else{
+					//printf("  Cyberware already assigned. Rerolling.\n");
+					--i;
+				}
+				
 				break;
 			case 9:
-				printf("NOTHING\n");
-
+				if(cyberwareCheck[tmp-CYBER_OFFSET] == 0){
+					printf("  NOTHING\n");
+					cyberwareCheck[tmp-CYBER_OFFSET] = 1;
+				}
+				else{
+					//printf("  Cyberware already assigned. Rerolling.\n");
+					--i;
+				}
+				
+				break;
+			default:
+				fprintf(stderr, "ERROR: Unable to generate cyberware.\n");
+				break;
 		}
 	}
 
 	weaponArmor = rand() % D_10;
 
 	printf("\nWEAPONS & ARMOR\n");
-	printf("Weapon: %s\n", weapon[weaponArmor]);
-	printf("Armor: %s\n", armor[weaponArmor]);
+	printf("  Weapon: %s\n", weapon[weaponArmor]);
+	printf("  Armor: %s\n", armor[weaponArmor]);
 }
 
 
