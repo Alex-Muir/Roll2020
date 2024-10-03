@@ -8,7 +8,7 @@
 GCC  
 
 With GCC installed:
-- download roll2020.c or clone the repository. 
+- Clone the repository or download the ZIP. 
 - Navigate to the directory where roll2020.c was downloaded.
 - Run: gcc -o roll2020 main.c instructions.c dice.c charactergen.c -Wall -Werror
 - After running the previous command an executable output file called roll2020 will be created.
